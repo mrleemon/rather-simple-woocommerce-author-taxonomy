@@ -1,19 +1,9 @@
 <?php
 /**
- * The Template for displaying product archives, including the main shop page which is a post type archive
+ * The Template for displaying product author taxonomy archives
  *
- * This template can be overridden by copying it to yourtheme/woocommerce/archive-product.php.
+ * This template can be overridden by copying it to yourtheme/woocommerce/taxonomy-product_author.php.
  *
- * HOWEVER, on occasion WooCommerce will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @see 	    https://docs.woocommerce.com/document/template-structure/
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     2.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -47,7 +37,14 @@ get_header( 'shop' ); ?>
 			}
 		?>
 		
-		<img src="<?php echo esc_url( $image ) ?>" alt="<?php echo esc_attr__( 'Thumbnail', 'woocommerce' ) ?>" class="wp-post-image" height="100" width="100" />
+		<div class="product-author">
+			<div class="product-author-image">
+				<img src="<?php echo esc_url( $image ) ?>" alt="<?php echo esc_attr__( 'Thumbnail', 'woocommerce' ) ?>" class="wp-post-image" height="100" width="100" />
+			</div>
+			<div class="product-author-description">
+				<?php echo term_description(); ?>
+			</div>
+		</div>
 
 		<?php
 			/**

@@ -27,18 +27,47 @@ if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', g
 
 class WooCommerce_Author_Taxonomy {
 	
-	/*
-	 * constructor
+	/**
+	 * Plugin instance.
 	 *
-	 * @since 1.0
+	 * @see get_instance()
+	 * @type object
 	 */
-    function __construct() {
+	protected static $instance = null;
 
+
+	/**
+	 * Access this plugin’s working instance
+	 *
+	 * @wp-hook plugins_loaded
+	 * @return  object of this class
+	 */
+	public static function get_instance() {
+		
+		if ( !self::$instance ) {
+			self::$instance = new self;
+		}
+
+		return self::$instance;
+
+	}
+
+	
+	/**
+	 * Used for regular plugin work.
+	 *
+	 * @wp-hook plugins_loaded
+	 * @return  void
+	 */
+	public function plugin_setup() {
+		
 		// Init
-        add_action( 'init', array($this, 'init') );
-        add_action( 'admin_init', array($this, 'admin_init') );
-        add_action( 'admin_init', array($this, 'save_admin_settings'), 0 );
-		add_filter( 'template_include', array($this, 'template_include') );
+		add_action( 'init', array( $this, 'load_language' ) );
+		add_action( 'init', array( $this, 'register_taxonomy' ) );
+        add_action( 'admin_init', array( $this, 'admin_init' ) );
+        add_action( 'admin_init', array( $this, 'save_admin_settings' ), 0 );
+        add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
+		add_filter( 'template_include', array( $this, 'template_include' ), 99 );
 
 		// Add form
 		add_action( 'product_author_add_form_fields', array( $this, 'add_author_fields' ) );
@@ -50,73 +79,27 @@ class WooCommerce_Author_Taxonomy {
 		add_filter( 'manage_edit-product_author_columns', array( $this, 'product_author_columns' ) );
 		add_filter( 'manage_product_author_custom_column', array( $this, 'product_author_column' ), 10, 3 );
 		
-    }
-    
-    
+	}
+	
+	
+	/**
+	 * Constructor. Intentionally left empty and public.
+	 *
+	 * @see plugin_setup()
+	 */
+	public function __construct() {}
+
+	
 	/*
-	 * init
+	 * load_language
 	 *
 	 * @since 1.0
 	 */
-    function init() {
+    function load_language() {
 		load_plugin_textdomain( 'woocommerce-author-taxonomy', '', dirname(plugin_basename( __FILE__ )) . '/languages/' );
-		$this->register_taxonomy();
     }
 
     
-	/*
-	 * admin_init
-	 *
-	 * @since 1.0
-	 */
-    function admin_init() {
-		add_settings_field(
-			'woocommerce_product_product_author_slug',
-			__( 'Product Author base', 'woocommerce-author-taxonomy' ),
-			array($this, 'product_tax_slug_input'),
-			'permalink',
-			'optional',
-			'product_author'
-		); 
-    }
-    
-	
-    /*
-	 * product_tax_slug_input
-	 *
-	 * @since 1.0
-	 */
-	function product_tax_slug_input( $taxonomy_slug ) {
-        $permalinks = get_option( 'wat_permalinks' );
-	?>
-		<input name="wc_product_author_slug" type="text" class="regular-text code" value="<?php if ( isset( $permalinks['product_author_tax_base'] ) ) echo esc_attr( $permalinks['product_author_tax_base'] ); ?>" placeholder="<?php echo _x('product-author', 'slug', 'woocommerce-author-taxonomy') ?>" />
-	<?php
-    }
-    
-	
-    /*
-	 * save_admin_settings
-	 *
-	 * @since 1.0
-	 */
-    function save_admin_settings() {
-        if ( ! is_admin() ) {
-            return;
-		}
-		
-        $permalinks = array();
-        
-		if ( isset( $_POST['wc_product_author_slug'] ) ) {
-			$permalinks['product_author_tax_base'] = untrailingslashit(woocommerce_clean($_POST['wc_product_author_slug']));
-        }
-        
-        if ( !empty( $permalinks ) ) {
-            update_option( 'wat_permalinks', $permalinks );
-            flush_rewrite_rules();   
-        }
-    }
-
-	
     /*
 	 * register_taxonomy
 	 *
@@ -160,6 +143,67 @@ class WooCommerce_Author_Taxonomy {
         );
 		
         register_taxonomy( 'product_author', 'product', $args );
+    }
+
+
+	/**
+	 * Enqueues scripts and styles in the frontend.
+	 */
+    function wp_enqueue_scripts(){
+		wp_enqueue_style( 'wat-style', plugins_url( '/css/style.css', __FILE__ ) );
+    }
+
+
+	/*
+	 * admin_init
+	 *
+	 * @since 1.0
+	 */
+    function admin_init() {
+		add_settings_field(
+			'woocommerce_product_product_author_slug',
+			__( 'Product Author base', 'woocommerce-author-taxonomy' ),
+			array( $this, 'product_tax_slug_input' ),
+			'permalink',
+			'optional',
+			'product_author'
+		); 
+    }
+    
+	
+    /*
+	 * product_tax_slug_input
+	 *
+	 * @since 1.0
+	 */
+	function product_tax_slug_input( $taxonomy_slug ) {
+        $permalinks = get_option( 'wat_permalinks' );
+	?>
+		<input name="wc_product_author_slug" type="text" class="regular-text code" value="<?php if ( isset( $permalinks['product_author_tax_base'] ) ) echo esc_attr( $permalinks['product_author_tax_base'] ); ?>" placeholder="<?php echo _x('product-author', 'slug', 'woocommerce-author-taxonomy' ) ?>" />
+	<?php
+    }
+    
+	
+    /*
+	 * save_admin_settings
+	 *
+	 * @since 1.0
+	 */
+    function save_admin_settings() {
+        if ( ! is_admin() ) {
+            return;
+		}
+		
+        $permalinks = array();
+        
+		if ( isset( $_POST['wc_product_author_slug'] ) ) {
+			$permalinks['product_author_tax_base'] = untrailingslashit(woocommerce_clean( $_POST['wc_product_author_slug']));
+        }
+        
+        if ( !empty( $permalinks ) ) {
+            update_option( 'wat_permalinks', $permalinks );
+            flush_rewrite_rules();   
+        }
     }
 	
 	
@@ -364,20 +408,19 @@ class WooCommerce_Author_Taxonomy {
 	function template_include( $template ) {
 		global $post;
 
-		if (is_tax('product_author')) {
+		if ( is_tax( 'product_author' ) ) {
 			if ( $file = locate_template( array( 'taxonomy-product_author.php' ) ) ) {
 				$template = $file;
 			} else {
-				$template = plugin_dir_path(__FILE__) . '/templates/taxonomy-product_author.php';
+				$template = plugin_dir_path( __FILE__ ) . 'templates/taxonomy-product_author.php';
 			}
 		}
-
 		return $template;
 	}
 
 	
 }
 
-$woocommerce_author_taxonomy = new WooCommerce_Author_Taxonomy;
+add_action( 'plugins_loaded', array ( WooCommerce_Author_Taxonomy::get_instance(), 'plugin_setup' ) );
 
 }

@@ -1,0 +1,14 @@
+.product-author {
+	margin-bottom: 50px;
+	overflow: hidden;
+}
+
+.product-author-image {
+	float: left;
+	width: 25%;
+}
+
+.product-author-description {
+	float: right;
+	width: 75%;
+}
