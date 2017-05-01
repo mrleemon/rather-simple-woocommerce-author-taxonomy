@@ -28,33 +28,22 @@ get_header( 'shop' ); ?>
 
 		<?php endif; ?>
 
-		<?php
-			$thumbnail_id = get_woocommerce_term_meta( $id, 'thumbnail_id', true );
-			if ( $thumbnail_id ) {
-				$image = wp_get_attachment_thumb_url( $thumbnail_id );
-			} else {
-				$image = wc_placeholder_img_src();
-			}
-		?>
-		
 		<div class="product-author">
 			<div class="product-author-image">
-				<img src="<?php echo esc_url( $image ) ?>" alt="<?php echo esc_attr__( 'Thumbnail', 'woocommerce' ) ?>" class="wp-post-image" height="100" width="100" />
+				<?php do_action( 'woocommerce_author_taxonomy_show_author_thumbnail', get_queried_object_id() ); ?>
 			</div>
 			<div class="product-author-description">
-				<?php echo term_description(); ?>
+				<?php 
+				/**
+				 * woocommerce_archive_description hook.
+				 *
+				 * @hooked woocommerce_taxonomy_archive_description - 10
+				 * @hooked woocommerce_product_archive_description - 10
+				 */
+				do_action( 'woocommerce_archive_description' );
+				?>
 			</div>
 		</div>
-
-		<?php
-			/**
-			 * woocommerce_archive_description hook.
-			 *
-			 * @hooked woocommerce_taxonomy_archive_description - 10
-			 * @hooked woocommerce_product_archive_description - 10
-			 */
-			do_action( 'woocommerce_archive_description' );
-		?>
 
 		<?php if ( have_posts() ) : ?>
 

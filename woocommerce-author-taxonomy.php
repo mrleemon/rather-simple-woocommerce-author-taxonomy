@@ -23,8 +23,6 @@ License: GPLv2 or later
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-
 class WooCommerce_Author_Taxonomy {
 	
 	/**
@@ -74,11 +72,16 @@ class WooCommerce_Author_Taxonomy {
 		add_action( 'product_author_edit_form_fields', array( $this, 'edit_author_fields' ), 10 );
 		add_action( 'created_term', array( $this, 'save_author_fields' ), 10, 3 );
 		add_action( 'edit_term', array( $this, 'save_author_fields' ), 10, 3 );
+
+		// Public actions
+		add_action( 'woocommerce_author_taxonomy_show_product_author_name', array( $this, 'show_product_author_name' ) );
+		add_action( 'woocommerce_author_taxonomy_show_author_thumbnail', array( $this, 'show_author_thumbnail' ) );
 		
 		// Add columns
-		add_filter( 'manage_edit-product_author_columns', array( $this, 'product_author_columns' ) );
+		//add_filter( 'manage_edit-product_author_columns', array( $this, 'product_author_columns' ) );
+		add_filter( 'manage_product_author_columns', array( $this, 'product_author_columns' ) );
 		add_filter( 'manage_product_author_custom_column', array( $this, 'product_author_column' ), 10, 3 );
-		
+	
 	}
 	
 	
@@ -179,10 +182,36 @@ class WooCommerce_Author_Taxonomy {
 	function product_tax_slug_input( $taxonomy_slug ) {
         $permalinks = get_option( 'wat_permalinks' );
 	?>
-		<input name="wc_product_author_slug" type="text" class="regular-text code" value="<?php if ( isset( $permalinks['product_author_tax_base'] ) ) echo esc_attr( $permalinks['product_author_tax_base'] ); ?>" placeholder="<?php echo _x('product-author', 'slug', 'woocommerce-author-taxonomy' ) ?>" />
+		<input name="wc_product_author_slug" type="text" class="regular-text code" value="<?php if ( isset( $permalinks['product_author_tax_base'] ) ) echo esc_attr( $permalinks['product_author_tax_base'] ); ?>" placeholder="<?php echo _x( 'product-author', 'slug', 'woocommerce-author-taxonomy' ) ?>" />
 	<?php
     }
-    
+    	
+	
+    /*
+	 * show_product_author_name
+	 *
+	 * @since 1.0
+	 */
+	function show_product_author_name( $product_id ) {
+		the_terms( $product_id, 'product_author' );
+	}
+
+
+    /*
+	 * show_author_thumbnail
+	 *
+	 * @since 1.0
+	 */
+	function show_author_thumbnail( $author_id ) {
+		$thumbnail_id = absint( get_woocommerce_term_meta( $author_id, 'thumbnail_id', true ) );
+		if ( $thumbnail_id ) {
+			$image = wp_get_attachment_thumb_url( $thumbnail_id );
+		} else {
+			$image = wc_placeholder_img_src();
+		}
+		echo '<img src="' . esc_url( $image ) . '" alt="' . esc_attr__( 'Thumbnail', 'woocommerce' ) .'" class="wp-post-image" />';
+	}
+
 	
     /*
 	 * save_admin_settings
@@ -421,6 +450,6 @@ class WooCommerce_Author_Taxonomy {
 	
 }
 
-add_action( 'plugins_loaded', array ( WooCommerce_Author_Taxonomy::get_instance(), 'plugin_setup' ) );
-
+if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
+	add_action( 'plugins_loaded', array ( WooCommerce_Author_Taxonomy::get_instance(), 'plugin_setup' ) );
 }
