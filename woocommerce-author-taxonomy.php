@@ -8,6 +8,7 @@ Author: Oscar Ciutat
 Author URI: http://oscarciutat.com/code/
 Text Domain: woocommerce-author-taxonomy
 License: GPLv2 or later
+WC tested up to: 3.6.5
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License, version 2, as 
