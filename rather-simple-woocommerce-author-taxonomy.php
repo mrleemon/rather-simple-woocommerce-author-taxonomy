@@ -1,14 +1,14 @@
 <?php
 /*
-Plugin Name: WooCommerce Author Taxonomy
+Plugin Name: Rather Simple WooCommerce Author Taxonomy
 Plugin URI: 
 Description: Adds an author taxonomy to products.
 Version: 1.0
+WC tested up to: 3.6.5
 Author: Oscar Ciutat
 Author URI: http://oscarciutat.com/code/
-Text Domain: woocommerce-author-taxonomy
+Text Domain: rather-simple-rather-simple-woocommerce-author-taxonomy
 License: GPLv2 or later
-WC tested up to: 3.6.5
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License, version 2, as 
@@ -24,7 +24,7 @@ WC tested up to: 3.6.5
   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-class WooCommerce_Author_Taxonomy {
+class Rather_Simple_WooCommerce_Author_Taxonomy {
     
     /**
      * Plugin instance.
@@ -100,7 +100,7 @@ class WooCommerce_Author_Taxonomy {
      * @since 1.0
      */
     function load_language() {
-        load_plugin_textdomain( 'woocommerce-author-taxonomy', '', dirname(plugin_basename( __FILE__ )) . '/languages/' );
+        load_plugin_textdomain( 'rather-simple-woocommerce-author-taxonomy', '', dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
 
     
@@ -114,21 +114,21 @@ class WooCommerce_Author_Taxonomy {
         $product_tax_slug = empty( $permalinks['product_author_tax_base'] ) ? 'product_author' : $permalinks['product_author_tax_base'];
         
         $labels = array(
-            'name' => __( 'Authors', 'woocommerce-author-taxonomy' ),
-            'singular_name' => __( 'Author', 'woocommerce-author-taxonomy' ),
-            'search_items' => __( 'Search Author', 'woocommerce-author-taxonomy' ),
-            'all_items' => __( 'All Authors', 'woocommerce-author-taxonomy' ),
-            'parent_item' => __( 'Parent Author', 'woocommerce-author-taxonomy' ),
-            'parent_item_colon' => __( 'Parent Author:', 'woocommerce-author-taxonomy' ),
-            'edit_item' => __( 'Edit Author', 'woocommerce-author-taxonomy' ),
-            'view_item' => __( 'View Author', 'woocommerce-author-taxonomy' ),
-            'update_item' => __( 'Update Author', 'woocommerce-author-taxonomy' ),
-            'add_new_item' => __( 'Add New Author', 'woocommerce-author-taxonomy' ),
-            'new_item_name' => __( 'New Author Name', 'woocommerce-author-taxonomy' ),
-            'not_found' => __( 'No authors found', 'woocommerce-author-taxonomy' ),
-            'no_terms' => __( 'No authors', 'woocommerce-author-taxonomy' ),
-            'items_list_navigation' => __( 'Authors list navigation', 'woocommerce-author-taxonomy' ),
-            'items_list' => __( 'Authors list', 'woocommerce-author-taxonomy' )
+            'name' => __( 'Authors', 'rather-simple-woocommerce-author-taxonomy' ),
+            'singular_name' => __( 'Author', 'rather-simple-woocommerce-author-taxonomy' ),
+            'search_items' => __( 'Search Author', 'rather-simple-woocommerce-author-taxonomy' ),
+            'all_items' => __( 'All Authors', 'rather-simple-woocommerce-author-taxonomy' ),
+            'parent_item' => __( 'Parent Author', 'rather-simple-woocommerce-author-taxonomy' ),
+            'parent_item_colon' => __( 'Parent Author:', 'rather-simple-woocommerce-author-taxonomy' ),
+            'edit_item' => __( 'Edit Author', 'rather-simple-woocommerce-author-taxonomy' ),
+            'view_item' => __( 'View Author', 'rather-simple-woocommerce-author-taxonomy' ),
+            'update_item' => __( 'Update Author', 'rather-simple-woocommerce-author-taxonomy' ),
+            'add_new_item' => __( 'Add New Author', 'rather-simple-woocommerce-author-taxonomy' ),
+            'new_item_name' => __( 'New Author Name', 'rather-simple-woocommerce-author-taxonomy' ),
+            'not_found' => __( 'No authors found', 'rather-simple-woocommerce-author-taxonomy' ),
+            'no_terms' => __( 'No authors', 'rather-simple-woocommerce-author-taxonomy' ),
+            'items_list_navigation' => __( 'Authors list navigation', 'rather-simple-woocommerce-author-taxonomy' ),
+            'items_list' => __( 'Authors list', 'rather-simple-woocommerce-author-taxonomy' )
         );
 
         $args = array(
@@ -166,7 +166,7 @@ class WooCommerce_Author_Taxonomy {
     function admin_init() {
         add_settings_field(
             'woocommerce_product_product_author_slug',
-            __( 'Product Author base', 'woocommerce-author-taxonomy' ),
+            __( 'Product Author base', 'rather-simple-woocommerce-author-taxonomy' ),
             array( $this, 'product_tax_slug_input' ),
             'permalink',
             'optional',
@@ -183,7 +183,7 @@ class WooCommerce_Author_Taxonomy {
     function product_tax_slug_input( $taxonomy_slug ) {
         $permalinks = get_option( 'wat_permalinks' );
     ?>
-        <input name="wc_product_author_slug" type="text" class="regular-text code" value="<?php if ( isset( $permalinks['product_author_tax_base'] ) ) echo esc_attr( $permalinks['product_author_tax_base'] ); ?>" placeholder="<?php echo _x( 'product-author', 'slug', 'woocommerce-author-taxonomy' ) ?>" />
+        <input name="wc_product_author_slug" type="text" class="regular-text code" value="<?php if ( isset( $permalinks['product_author_tax_base'] ) ) echo esc_attr( $permalinks['product_author_tax_base'] ); ?>" placeholder="<?php echo _x( 'product-author', 'slug', 'rather-simple-woocommerce-author-taxonomy' ) ?>" />
     <?php
     }
         
@@ -452,5 +452,5 @@ class WooCommerce_Author_Taxonomy {
 }
 
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-    add_action( 'plugins_loaded', array ( WooCommerce_Author_Taxonomy::get_instance(), 'plugin_setup' ) );
+    add_action( 'plugins_loaded', array ( Rather_Simple_WooCommerce_Author_Taxonomy::get_instance(), 'plugin_setup' ) );
 }
