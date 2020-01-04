@@ -7,7 +7,7 @@ Version: 1.0
 WC tested up to: 3.6.5
 Author: Oscar Ciutat
 Author URI: http://oscarciutat.com/code/
-Text Domain: rather-simple-rather-simple-woocommerce-author-taxonomy
+Text Domain: rather-simple-woocommerce-author-taxonomy
 License: GPLv2 or later
 
   This program is free software; you can redistribute it and/or modify
@@ -116,7 +116,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         $labels = array(
             'name' => __( 'Authors', 'rather-simple-woocommerce-author-taxonomy' ),
             'singular_name' => __( 'Author', 'rather-simple-woocommerce-author-taxonomy' ),
-            'search_items' => __( 'Search Author', 'rather-simple-woocommerce-author-taxonomy' ),
+            'search_items' => __( 'Search Authors', 'rather-simple-woocommerce-author-taxonomy' ),
             'all_items' => __( 'All Authors', 'rather-simple-woocommerce-author-taxonomy' ),
             'parent_item' => __( 'Parent Author', 'rather-simple-woocommerce-author-taxonomy' ),
             'parent_item_colon' => __( 'Parent Author:', 'rather-simple-woocommerce-author-taxonomy' ),
