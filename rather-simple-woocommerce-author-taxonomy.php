@@ -4,7 +4,7 @@ Plugin Name: Rather Simple WooCommerce Author Taxonomy
 Plugin URI: 
 Description: Adds an author taxonomy to products.
 Version: 1.0
-WC tested up to: 3.6.5
+WC tested up to: 4.2
 Author: Oscar Ciutat
 Author URI: http://oscarciutat.com/code/
 Text Domain: rather-simple-woocommerce-author-taxonomy
