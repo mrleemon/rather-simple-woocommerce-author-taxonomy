@@ -227,7 +227,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         $permalinks = array();
         
         if ( isset( $_POST['wc_product_author_slug'] ) ) {
-            $permalinks['product_author_tax_base'] = untrailingslashit(woocommerce_clean( $_POST['wc_product_author_slug']));
+            $permalinks['product_author_tax_base'] = untrailingslashit( woocommerce_clean( $_POST['wc_product_author_slug'] ) );
         }
         
         if ( !empty( $permalinks ) ) {
