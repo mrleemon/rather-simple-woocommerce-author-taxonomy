@@ -245,12 +245,12 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
     public function add_author_fields() {
         ?>
         <div class="form-field term-thumbnail-wrap">
-            <label><?php _e( 'Thumbnail', 'woocommerce' ); ?></label>
+            <label><?php esc_html_e( 'Thumbnail', 'woocommerce' ); ?></label>
             <div id="product_author_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" width="60px" height="60px" /></div>
             <div style="line-height: 60px;">
                 <input type="hidden" id="product_author_thumbnail_id" name="product_author_thumbnail_id" />
-                <button type="button" class="upload_image_button button"><?php _e( 'Upload/Add image', 'woocommerce' ); ?></button>
-                <button type="button" class="remove_image_button button"><?php _e( 'Remove image', 'woocommerce' ); ?></button>
+                <button type="button" class="upload_image_button button"><?php esc_html_e( 'Upload/Add image', 'woocommerce' ); ?></button>
+                <button type="button" class="remove_image_button button"><?php esc_html_e( 'Remove image', 'woocommerce' ); ?></button>
             </div>
             <script type="text/javascript">
                 // Only show the "remove image" button when needed
@@ -268,17 +268,18 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
                     }
                     // Create the media frame.
                     file_frame = wp.media.frames.downloadable_file = wp.media({
-                        title: '<?php _e( "Choose an image", "woocommerce" ); ?>',
+                        title: '<?php esc_html_e( 'Choose an image', 'woocommerce' ); ?>',
                         button: {
-                            text: '<?php _e( "Use image", "woocommerce" ); ?>'
+                            text: '<?php esc_html_e( 'Use image', 'woocommerce' ); ?>'
                         },
                         multiple: false
                     });
                     // When an image is selected, run a callback.
                     file_frame.on( 'select', function() {
                         var attachment = file_frame.state().get( 'selection' ).first().toJSON();
+                        var attachment_thumbnail = attachment.sizes.thumbnail || attachment.sizes.full;
                         jQuery( '#product_author_thumbnail_id' ).val( attachment.id );
-                        jQuery( '#product_author_thumbnail' ).find( 'img' ).attr( 'src', attachment.sizes.thumbnail.url );
+                        jQuery( '#product_author_thumbnail' ).find( 'img' ).attr( 'src', attachment_thumbnail.url );
                         jQuery( '.remove_image_button' ).show();
                     });
                     // Finally, open the modal.
@@ -327,13 +328,13 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         }
         ?>
         <tr class="form-field">
-            <th scope="row" valign="top"><label><?php _e( 'Thumbnail', 'woocommerce' ); ?></label></th>
+            <th scope="row" valign="top"><label><?php esc_html_e( 'Thumbnail', 'woocommerce' ); ?></label></th>
             <td>
                 <div id="product_author_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url( $image ); ?>" width="60px" height="60px" /></div>
                 <div style="line-height: 60px;">
                     <input type="hidden" id="product_author_thumbnail_id" name="product_author_thumbnail_id" value="<?php echo $thumbnail_id; ?>" />
-                    <button type="button" class="upload_image_button button"><?php _e( 'Upload/Add image', 'woocommerce' ); ?></button>
-                    <button type="button" class="remove_image_button button"><?php _e( 'Remove image', 'woocommerce' ); ?></button>
+                    <button type="button" class="upload_image_button button"><?php esc_html_e( 'Upload/Add image', 'woocommerce' ); ?></button>
+                    <button type="button" class="remove_image_button button"><?php esc_html_e( 'Remove image', 'woocommerce' ); ?></button>
                 </div>
                 <script type="text/javascript">
                     // Only show the "remove image" button when needed
@@ -351,17 +352,18 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
                         }
                         // Create the media frame.
                         file_frame = wp.media.frames.downloadable_file = wp.media({
-                            title: '<?php _e( "Choose an image", "woocommerce" ); ?>',
+                            title: '<?php esc_html_e( 'Choose an image', 'woocommerce' ); ?>',
                             button: {
-                                text: '<?php _e( "Use image", "woocommerce" ); ?>'
+                                text: '<?php esc_html_e( 'Use image', 'woocommerce' ); ?>'
                             },
                             multiple: false
                         });
                         // When an image is selected, run a callback.
                         file_frame.on( 'select', function() {
                             var attachment = file_frame.state().get( 'selection' ).first().toJSON();
+                            var attachment_thumbnail = attachment.sizes.thumbnail || attachment.sizes.full;
                             jQuery( '#product_author_thumbnail_id' ).val( attachment.id );
-                            jQuery( '#product_author_thumbnail' ).find( 'img' ).attr( 'src', attachment.sizes.thumbnail.url );
+                            jQuery( '#product_author_thumbnail' ).find( 'img' ).attr( 'src', attachment_thumbnail.url );
                             jQuery( '.remove_image_button' ).show();
                         });
                         // Finally, open the modal.
