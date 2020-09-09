@@ -204,7 +204,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
      * @since 1.0
      */
     function show_author_thumbnail( $author_id ) {
-        $thumbnail_id = absint( get_woocommerce_term_meta( $author_id, 'thumbnail_id', true ) );
+        $thumbnail_id = absint( get_term_meta( $author_id, 'thumbnail_id', true ) );
         if ( $thumbnail_id ) {
             $image = wp_get_attachment_thumb_url( $thumbnail_id );
         } else {
@@ -319,7 +319,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
      * @since 1.0
      */
     public function edit_author_fields( $term ) {
-        $thumbnail_id = absint( get_woocommerce_term_meta( $term->term_id, 'thumbnail_id', true ) );
+        $thumbnail_id = absint( get_term_meta( $term->term_id, 'thumbnail_id', true ) );
         if ( $thumbnail_id ) {
             $image = wp_get_attachment_thumb_url( $thumbnail_id );
         } else {
@@ -416,7 +416,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
      */
     public function product_author_column( $columns, $column, $id ) {
         if ( 'thumb' == $column ) {
-            $thumbnail_id = get_woocommerce_term_meta( $id, 'thumbnail_id', true );
+            $thumbnail_id = get_term_meta( $id, 'thumbnail_id', true );
             if ( $thumbnail_id ) {
                 $image = wp_get_attachment_thumb_url( $thumbnail_id );
             } else {
