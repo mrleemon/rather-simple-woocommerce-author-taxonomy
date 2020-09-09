@@ -388,7 +388,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
      */
     public function save_author_fields( $term_id, $tt_id = '', $taxonomy = '' ) {
         if ( isset( $_POST['product_author_thumbnail_id'] ) && 'product_author' === $taxonomy ) {
-            update_woocommerce_term_meta( $term_id, 'thumbnail_id', absint( $_POST['product_author_thumbnail_id'] ) );
+            update_term_meta( $term_id, 'thumbnail_id', absint( $_POST['product_author_thumbnail_id'] ) );
         }
     }
     
