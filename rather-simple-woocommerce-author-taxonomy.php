@@ -71,8 +71,8 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         // Add form
         add_action( 'product_author_add_form_fields', array( $this, 'add_author_fields' ) );
         add_action( 'product_author_edit_form_fields', array( $this, 'edit_author_fields' ), 10 );
-        add_action( 'created_product_author', array( $this, 'save_author_fields' ) );
-        add_action( 'edit_product_author', array( $this, 'save_author_fields' ) );
+        add_action( 'created_product_author', array( $this, 'save_author_fields' ), 10, 2 );
+        add_action( 'edit_product_author', array( $this, 'save_author_fields' ), 10, 2 );
 
         // Public actions
         add_action( 'woocommerce_author_taxonomy_show_product_author_name', array( $this, 'show_product_author_name' ) );
