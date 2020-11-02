@@ -71,16 +71,15 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         // Add form
         add_action( 'product_author_add_form_fields', array( $this, 'add_author_fields' ) );
         add_action( 'product_author_edit_form_fields', array( $this, 'edit_author_fields' ), 10 );
-        add_action( 'created_term', array( $this, 'save_author_fields' ), 10, 3 );
-        add_action( 'edit_term', array( $this, 'save_author_fields' ), 10, 3 );
+        add_action( 'created_product_author', array( $this, 'save_author_fields' ) );
+        add_action( 'edit_product_author', array( $this, 'save_author_fields' ) );
 
         // Public actions
         add_action( 'woocommerce_author_taxonomy_show_product_author_name', array( $this, 'show_product_author_name' ) );
         add_action( 'woocommerce_author_taxonomy_show_author_thumbnail', array( $this, 'show_author_thumbnail' ) );
         
         // Add columns
-        //add_filter( 'manage_edit-product_author_columns', array( $this, 'product_author_columns' ) );
-        add_filter( 'manage_product_author_columns', array( $this, 'product_author_columns' ) );
+        add_filter( 'manage_edit-product_author_columns', array( $this, 'product_author_columns' ) );
         add_filter( 'manage_product_author_custom_column', array( $this, 'product_author_column' ), 10, 3 );
     
     }
@@ -388,8 +387,8 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
      *
      * @since 1.0
      */
-    public function save_author_fields( $term_id, $tt_id = '', $taxonomy = '' ) {
-        if ( isset( $_POST['product_author_thumbnail_id'] ) && 'product_author' === $taxonomy ) {
+    public function save_author_fields( $term_id, $tt_id = '' ) {
+        if ( isset( $_POST['product_author_thumbnail_id'] ) ) {
             update_term_meta( $term_id, 'thumbnail_id', absint( $_POST['product_author_thumbnail_id'] ) );
         }
     }
