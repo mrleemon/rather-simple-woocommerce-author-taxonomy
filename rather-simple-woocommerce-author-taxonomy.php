@@ -1,7 +1,8 @@
 <?php
 /*
 Plugin Name: Rather Simple WooCommerce Author Taxonomy
-Plugin URI: 
+Plugin URI:
+Update URI: false 
 Description: Adds an author taxonomy to products.
 Version: 1.0
 WC tested up to: 4.4.1
