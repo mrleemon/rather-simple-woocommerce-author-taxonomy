@@ -5,7 +5,7 @@ Plugin URI:
 Update URI: false 
 Description: Adds an author taxonomy to products.
 Version: 1.0
-WC tested up to: 4.4.1
+WC tested up to: 5.6
 Author: Oscar Ciutat
 Author URI: http://oscarciutat.com/code/
 Text Domain: rather-simple-woocommerce-author-taxonomy
