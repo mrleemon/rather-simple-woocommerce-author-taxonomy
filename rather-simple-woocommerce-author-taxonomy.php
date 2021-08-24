@@ -293,8 +293,6 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
                         jQuery( '#product_author_thumbnail' ).find( 'img' ).attr( 'src', '<?php echo esc_js( wc_placeholder_img_src() ); ?>' );
                         jQuery( '#product_author_thumbnail_id' ).val( '' );
                         jQuery( '.remove_image_button' ).hide();
-                        // Clear Display type field on submit
-                        jQuery( '#display_type' ).val( '' );
                         return;
                     }
                 } );
