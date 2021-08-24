@@ -272,6 +272,9 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
                         button: {
                             text: '<?php esc_html_e( 'Use image', 'woocommerce' ); ?>'
                         },
+                        library: {
+                            type: [ 'image' ]
+                        },
                         multiple: false
                     });
                     // When an image is selected, run a callback.
@@ -355,6 +358,9 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
                             title: '<?php esc_html_e( 'Choose an image', 'woocommerce' ); ?>',
                             button: {
                                 text: '<?php esc_html_e( 'Use image', 'woocommerce' ); ?>'
+                            },
+                            library: {
+                                type: [ 'image' ]
                             },
                             multiple: false
                         });
