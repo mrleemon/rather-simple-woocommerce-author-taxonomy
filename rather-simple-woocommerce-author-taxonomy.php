@@ -246,7 +246,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         ?>
         <div class="form-field term-thumbnail-wrap">
             <label><?php esc_html_e( 'Thumbnail', 'woocommerce' ); ?></label>
-            <div id="product_author_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" width="60px" height="60px" /></div>
+            <div id="product_author_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url( wc_placeholder_img_src() ); ?>" width="60" height="60" /></div>
             <div style="line-height: 60px;">
                 <input type="hidden" id="product_author_thumbnail_id" name="product_author_thumbnail_id" />
                 <button type="button" class="upload_image_button button"><?php esc_html_e( 'Upload/Add image', 'woocommerce' ); ?></button>
@@ -333,7 +333,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         <tr class="form-field">
             <th scope="row" valign="top"><label><?php esc_html_e( 'Thumbnail', 'woocommerce' ); ?></label></th>
             <td>
-                <div id="product_author_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url( $image ); ?>" width="60px" height="60px" /></div>
+                <div id="product_author_thumbnail" style="float: left; margin-right: 10px;"><img src="<?php echo esc_url( $image ); ?>" width="60" height="60" /></div>
                 <div style="line-height: 60px;">
                     <input type="hidden" id="product_author_thumbnail_id" name="product_author_thumbnail_id" value="<?php echo $thumbnail_id; ?>" />
                     <button type="button" class="upload_image_button button"><?php esc_html_e( 'Upload/Add image', 'woocommerce' ); ?></button>
