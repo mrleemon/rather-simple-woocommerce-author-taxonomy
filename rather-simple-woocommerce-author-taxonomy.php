@@ -35,7 +35,6 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
      */
     protected static $instance = null;
 
-
     /**
      * Access this plugin’s working instance
      *
@@ -52,7 +51,6 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 
     }
 
-    
     /**
      * Used for regular plugin work.
      *
@@ -85,16 +83,14 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
     
     }
     
-    
     /**
      * Constructor. Intentionally left empty and public.
      *
      * @see plugin_setup()
      */
     public function __construct() {}
-
     
-    /*
+    /**
      * load_language
      *
      * @since 1.0
@@ -102,9 +98,8 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
     function load_language() {
         load_plugin_textdomain( 'rather-simple-woocommerce-author-taxonomy', '', dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
     }
-
     
-    /*
+    /**
      * register_taxonomy
      *
      * @since 1.0
@@ -149,7 +144,6 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         register_taxonomy( 'product_author', 'product', $args );
     }
 
-
     /**
      * Enqueues scripts and styles in the frontend.
      */
@@ -157,8 +151,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         wp_enqueue_style( 'wat-style', plugins_url( 'style.css', __FILE__ ) );
     }
 
-
-    /*
+    /**
      * admin_init
      *
      * @since 1.0
@@ -174,8 +167,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         ); 
     }
     
-    
-    /*
+    /**
      * product_tax_slug_input
      *
      * @since 1.0
@@ -187,8 +179,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
     <?php
     }
         
-    
-    /*
+    /**
      * show_product_author_name
      *
      * @since 1.0
@@ -197,8 +188,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         the_terms( $product_id, 'product_author' );
     }
 
-
-    /*
+    /**
      * show_author_thumbnail
      *
      * @since 1.0
@@ -213,8 +203,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         echo '<img src="' . esc_url( $image ) . '" alt="' . esc_attr__( 'Thumbnail', 'woocommerce' ) .'" class="wp-post-image" />';
     }
 
-    
-    /*
+    /**
      * save_admin_settings
      *
      * @since 1.0
@@ -236,8 +225,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         }
     }
     
-    
-    /*
+    /**
      * add_author_fields
      *
      * @since 1.0
@@ -316,8 +304,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         <?php
     }    
     
-    
-    /*
+    /**
      * edit_author_fields
      *
      * @since 1.0
@@ -388,8 +375,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         <?php
     }    
     
-    
-    /*
+    /**
      * save_author_fields
      *
      * @since 1.0
@@ -400,8 +386,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         }
     }
     
-    
-    /*
+    /**
      * product_author_columns
      *
      * @since 1.0
@@ -416,8 +401,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         return array_merge( $new_columns, $columns );
     }
     
-    
-    /*
+    /**
      * product_author_column
      *
      * @since 1.0
@@ -438,7 +422,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         return $columns;
     }
     
-    /*
+    /**
      * template_include
      *
      * @since 1.0
@@ -455,8 +439,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
         }
         return $template;
     }
-
-    
+   
 }
 
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
