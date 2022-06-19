@@ -94,7 +94,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 	 * Load language
 	 */
 	public function load_language() {
-		load_plugin_textdomain( 'rather-simple-woocommerce-author-taxonomy', '', dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+		load_plugin_textdomain( 'rather-simple-woocommerce-author-taxonomy', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 	}
 
 	/**
