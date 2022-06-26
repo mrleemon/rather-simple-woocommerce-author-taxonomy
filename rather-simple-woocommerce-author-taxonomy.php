@@ -144,7 +144,12 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 	 * Enqueues scripts and styles in the frontend.
 	 */
 	public function wp_enqueue_scripts() {
-		wp_enqueue_style( 'wat-style', plugins_url( 'style.css', __FILE__ ) );
+		wp_enqueue_style(
+			'wat-style',
+			plugins_url( 'style.css', __FILE__ ),
+			array(),
+			filemtime( plugin_dir_path( __FILE__ ) . '/style.css' )
+		);
 	}
 
 	/**
