@@ -426,7 +426,8 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 		global $post;
 
 		if ( is_tax( 'product_author' ) ) {
-			if ( $file = locate_template( array( 'taxonomy-product_author.php' ) ) ) {
+			$file = locate_template( array( 'taxonomy-product_author.php' ) );
+			if ( '' !== $file ) {
 				$template = $file;
 			} else {
 				$template = plugin_dir_path( __FILE__ ) . 'templates/taxonomy-product_author.php';
