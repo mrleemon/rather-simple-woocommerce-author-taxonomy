@@ -3,12 +3,14 @@
  * Plugin Name: Rather Simple WooCommerce Author Taxonomy
  * Plugin URI:
  * Update URI: false
- * Description: Adds an author taxonomy to products.
  * Version: 1.0
+ * Requires at least: 5.3
+ * Requires PHP: 7.0
  * WC tested up to: 5.6
  * Author: Oscar Ciutat
  * Author URI: http://oscarciutat.com/code/
  * Text Domain: rather-simple-woocommerce-author-taxonomy
+ * Description: Adds an author taxonomy to products.
  * License: GPLv2 or later
  *
  * This program is free software; you can redistribute it and/or modify
