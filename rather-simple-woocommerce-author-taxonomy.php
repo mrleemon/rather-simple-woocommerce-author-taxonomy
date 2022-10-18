@@ -64,6 +64,7 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 		// Init.
 		add_action( 'init', array( $this, 'load_language' ) );
 		add_action( 'init', array( $this, 'register_taxonomy' ) );
+		add_action( 'before_woocommerce_init', array( $this, 'declare_wchpos_compatibility' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'admin_init', array( $this, 'save_admin_settings' ), 0 );
 		add_action( 'wp_enqueue_scripts', array( $this, 'wp_enqueue_scripts' ) );
@@ -97,6 +98,15 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 	 */
 	public function load_language() {
 		load_plugin_textdomain( 'rather-simple-woocommerce-author-taxonomy', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+	}
+
+	/**
+	 * Declare WooCommerce High-Performance Order Storage compatibility
+	 */
+	public function declare_wchpos_compatibility() {
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+		}
 	}
 
 	/**
