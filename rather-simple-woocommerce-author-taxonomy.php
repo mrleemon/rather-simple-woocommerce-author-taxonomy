@@ -53,7 +53,6 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 		}
 
 		return self::$instance;
-
 	}
 
 	/**
@@ -83,7 +82,6 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 		// Add columns.
 		add_filter( 'manage_edit-product_author_columns', array( $this, 'product_author_columns' ) );
 		add_filter( 'manage_product_author_custom_column', array( $this, 'product_author_column' ), 10, 3 );
-
 	}
 
 	/**
@@ -447,7 +445,6 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 		}
 		return $template;
 	}
-
 }
 
 if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ), true ) ) {
