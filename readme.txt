@@ -1,7 +1,7 @@
 === WooCommerce Author Taxonomy ===
 Contributors: leemon
 Tags: woocommerce, products, author, taxonomy
-Requires at least: 4.9
+Requires at least: 6.3
 Tested up to: 5.5
 Stable tag: 1.0
 License: GPLv2 or later
