@@ -11,6 +11,7 @@
  * Author: Oscar Ciutat
  * Author URI: http://oscarciutat.com/code/
  * Text Domain: rather-simple-woocommerce-author-taxonomy
+ * Domain Path: /languages
  * Description: Adds an author taxonomy to products.
  * License: GPLv2 or later
  *
