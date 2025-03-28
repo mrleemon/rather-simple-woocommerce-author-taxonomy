@@ -4,7 +4,7 @@
  * Plugin URI:
  * Update URI: false
  * Version: 1.0
- * Requires at least: 6.6
+ * Requires at least: 6.8
  * Requires PHP: 7.4
  * Requires Plugins: woocommerce
  * WC tested up to: 7.1
@@ -63,7 +63,6 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 	public function plugin_setup() {
 
 		// Init.
-		add_action( 'init', array( $this, 'load_language' ) );
 		add_action( 'init', array( $this, 'register_taxonomy' ) );
 		add_action( 'before_woocommerce_init', array( $this, 'declare_wchpos_compatibility' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
@@ -92,13 +91,6 @@ class Rather_Simple_WooCommerce_Author_Taxonomy {
 	 * @see plugin_setup()
 	 */
 	public function __construct() {}
-
-	/**
-	 * Load language
-	 */
-	public function load_language() {
-		load_plugin_textdomain( 'rather-simple-woocommerce-author-taxonomy', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-	}
 
 	/**
 	 * Declare WooCommerce High-Performance Order Storage compatibility
